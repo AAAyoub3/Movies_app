@@ -18,7 +18,7 @@ class SearchTab extends StatelessWidget {
           ),
           child: TextField(
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 15,
               color: Colors.black,
             ),
             decoration: InputDecoration(
