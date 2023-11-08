@@ -7,7 +7,8 @@ class MyThemeData {
   static Color lightGreyColor = const Color(0xFF707070);
   static Color greyColor = const Color(0x81514F4F);
   static Color offWhiteColor = const Color(0xACFFFFFF);
-
+  static Color yellowColor = const Color(0xFFF7B539);
+  static Color containerColor = const Color(0xFF282A28);
 
   static ThemeData darkTheme = ThemeData(
       textTheme: TextTheme(
