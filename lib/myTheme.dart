@@ -11,6 +11,10 @@ class MyThemeData {
   static Color containerColor = const Color(0xFF282A28);
 
   static ThemeData darkTheme = ThemeData(
+    appBarTheme: AppBarTheme(
+      color: greyColor
+    ),
+
       textTheme: TextTheme(
         titleLarge: TextStyle(
             fontSize: 22,

@@ -24,8 +24,8 @@ class BrowseTab extends StatelessWidget {
               padding: const EdgeInsets.all(0),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 15,
                 mainAxisSpacing: 0,
+                crossAxisSpacing: 15
               ),
             ),
           ),
