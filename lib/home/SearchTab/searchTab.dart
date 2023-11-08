@@ -5,57 +5,48 @@ class SearchTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Column(
+      mainAxisSize: MainAxisSize.max,
       children: [
+        SizedBox(height: MediaQuery.of(context).size.height*0.08,),
+        /// search
         Container(
-          height: 50,
-          width: 320,
-          margin: EdgeInsets.only(
-            top: 50,
-            left: 25,
-            right: 10,
-          ),
+          margin: const EdgeInsets.all(10),
+          height: MediaQuery.of(context).size.height*0.07,
           child: TextField(
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.black,
-            ),
+            style: Theme.of(context).textTheme.bodyMedium,
             decoration: InputDecoration(
               prefixIcon: Icon(
                 Icons.search_rounded,
                 color: MyThemeData.whiteColor,
               ),
               hintText: "Search",
-              hintStyle: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w200,
-                fontSize: 14,
-              ),
-              fillColor: MyThemeData.greyyColor,
+              hintStyle: Theme.of(context).textTheme.bodyMedium,
+              fillColor: MyThemeData.greyColor,
               filled: true,
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
                 borderSide: BorderSide(
                   color: MyThemeData.whiteColor,
+                  width: 1
                 ),
               ),
-
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(30),
                 borderSide: BorderSide(
-                  color: MyThemeData.greyyColor,
+                  color: MyThemeData.whiteColor,
+                  width: 1
                 ),
               ),
               //icon: Icon(Icons.search_rounded)
             ),
           ),
         ),
-        Container(
-            margin: EdgeInsets.only(
-              top: 220,
-            ),
-            child: Center(child: Image.asset("assets/images/Group 22.png"))),
+
+        /// no movies found
+        Center(
+          heightFactor: MediaQuery.of(context).size.height*0.0062,
+            child: Image.asset("assets/images/Group 22.png")),
       ],
     );
   }

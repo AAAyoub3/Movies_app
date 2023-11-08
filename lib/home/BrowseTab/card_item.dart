@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../../myTheme.dart';
-
 class CardItem extends StatelessWidget {
-  const CardItem({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(child: Stack(
+    return Stack(
       alignment: Alignment.center,
       children: [
-        Image.asset("assets/images/sora1.png"),
-        Text("Action",style: TextStyle(
-          color: MyThemeData.whiteColor,
-        ),),
+        Image.asset("assets/images/sora1.png",
+          fit: BoxFit.fill,
+
+        ),
+        Text("Action", style: Theme.of(context).textTheme.titleSmall,),
       ],
-    ));
+    );
   }
 }
