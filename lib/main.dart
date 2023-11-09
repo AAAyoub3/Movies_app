@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/home/HomeTab/MovieDetailsScreen.dart';
 import 'home/homescreen.dart';
 import 'myTheme.dart';
 
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
 
       initialRoute: HomeScreen.routeName,
       routes: {
-        HomeScreen.routeName: (context) => HomeScreen(),
+        HomeScreen.routeName : (context) => HomeScreen(),
+        MovieDetailsScreen.routeName : (context) => MovieDetailsScreen(),
       },
     );
   }

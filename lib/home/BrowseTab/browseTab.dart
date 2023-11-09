@@ -1,146 +1,35 @@
 import 'package:flutter/material.dart';
-import '../../myTheme.dart';
 import 'card_item.dart';
 
 class BrowseTab extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: MyThemeData.blackColor,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            children: [
-              Container(
-                alignment: Alignment.topLeft,
-                margin: EdgeInsets.only(
-                  top: 70,
-                ),
-                child: Text(
-                  "Browse Category",
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w400,
-                    color: MyThemeData.whiteColor,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                children: [
-                  CardItem(),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  CardItem(),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  CardItem(),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  CardItem(),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  CardItem(),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  CardItem(),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  CardItem(),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  CardItem(),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  CardItem(),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  CardItem(),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  CardItem(),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  CardItem(),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  CardItem(),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  CardItem(),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  CardItem(),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  CardItem(),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: [
-                  CardItem(),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  CardItem(),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
 
-            ],
+    return Container(
+      margin: const EdgeInsets.all(15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(height: MediaQuery.of(context).size.height*0.1,),
+          /// title
+          Text('Browse Category',
+            style: Theme.of(context).textTheme.titleLarge,
           ),
-        ),
+          /// grid view
+          Expanded(
+            child: GridView.builder(
+              itemBuilder: (context, index) => CardItem(),
+              itemCount: 10,
+              padding: const EdgeInsets.all(0),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 0,
+                crossAxisSpacing: 15
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

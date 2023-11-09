@@ -1,14 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../myTheme.dart';
-
 class WatchListItem extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: [
+          /// image and bookmark
           Stack(
             alignment: Alignment.topLeft,
             children: [
@@ -16,33 +16,16 @@ class WatchListItem extends StatelessWidget {
               Image.asset("assets/images/bookmark.png")
             ],
           ),
+
+          const SizedBox(width: 12,),
+
+          /// side texts
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '  rowan magdt jhbudh ',
-                  style: TextStyle(
-                    color: MyThemeData.whiteColor,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 15,
-                  ),
-                ),
-                Text(
-                  "  2023 ",
-                  style: TextStyle(
-                    color: MyThemeData.offwhiteColor,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 13,
-                  ),
-                ),
-                Text(
-                  "  qwertyy ",
-                  style: TextStyle(
-                    color: MyThemeData.offwhiteColor,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 13,
-                  ),
-                ),
+                Text('Movie Name', style: Theme.of(context).textTheme.bodyMedium),
+                Text("2023", style: Theme.of(context).textTheme.bodySmall),
+                Text("Cast Names", style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
         ],
