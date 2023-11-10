@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:movies/API/api_manager.dart';
 import 'package:movies/home/HomeTab/HorizontalSliderWidget.dart';
-import 'package:movies/home/HomeTab/popular_movies_widget.dart';
+import 'package:movies/home/HomeTab/Phase1/popular_movies_widget.dart';
 import 'package:movies/model/popularResource.dart';
 import 'dart:async';
+
+import '../../model/recommendResource.dart';
+import '../../model/releasesResource.dart';
 
 
 class HomeTab extends StatefulWidget {
@@ -13,7 +16,11 @@ class HomeTab extends StatefulWidget {
 
 class _HomeTabState extends State<HomeTab> {
   late PageController _pageController;
-  late var list;
+  late List<dynamic> popularList;
+  late List<dynamic>  releaseList;
+  late List<dynamic>  recommendList;
+
+
   @override
   void initState() {
     super.initState();
@@ -23,7 +30,7 @@ class _HomeTabState extends State<HomeTab> {
         if (_pageController.hasClients) {
         var nextPage = _pageController.page! + 1;
 
-        if (nextPage >= list!.length) { /// Reached the end then start over
+        if (nextPage >= popularList!.length) { /// Reached the end then start over
           _pageController.jumpToPage(0);
         }
         else {
@@ -39,7 +46,8 @@ class _HomeTabState extends State<HomeTab> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<PopularResource?>(future: ApiManager.getPopular(),
+    return FutureBuilder(
+        future: Future.wait([ApiManager.getPopular(), ApiManager.getRelease(), ApiManager.getRecommended()]),
         builder: (context, snapshot) {
 
           /// If he is still loading
@@ -49,26 +57,33 @@ class _HomeTabState extends State<HomeTab> {
                 .primaryColor));
           }
 
+          var popularResponse = snapshot.data![0] as PopularResource;
+          var releasesResponse = snapshot.data![1] as NewReleasesResource;
+          var recommendResponse = snapshot.data![2] as RecommendResource;
+
           /// User Error
-          else if (snapshot.hasError) {
+          if (snapshot.hasError) {
             return Column(
               children: [
-                Text(snapshot.data?.status_message ?? ''),
+                Text(popularResponse.status_message ?? ''),
                 ElevatedButton(onPressed: () {}, child: const Text("Try Again"))
               ],
             );
           }
 
           /// API Error
-          if (snapshot.data?.results == null) {
+          if (popularResponse.results == null) {
             return Column(
               children: [
-                Text(snapshot.data?.status_message ?? ''),
+                Text(popularResponse.status_message ?? ''),
                 ElevatedButton(onPressed: () {}, child: const Text("Try Again"))
               ],
             );
           }
-          list = snapshot.data?.results; /// list for popular
+
+          popularList = popularResponse.results!;
+          releaseList = releasesResponse.results!;
+          recommendList = recommendResponse.results!;
 
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,20 +102,31 @@ class _HomeTabState extends State<HomeTab> {
                   itemBuilder: (context, index) =>
                       PopularMoviesWidget(
                         index: index,
-                        list: list,
+                        list: popularList,
                       ),
-                  itemCount: list!.length,
+                  itemCount: popularList!.length,
                 ),
               ),
 
               /// new releases
-              HorizontalSliderWidget(title: "New Releases",
-                imgPath: "assets/images/Doraa2.png",),
+              Expanded(
+                child: HorizontalSliderWidget(
+                  title: "New Releases",
+                  list: releaseList,
+                  type: "Releases",
+                ),
+              ),
+
               const SizedBox(height: 30,),
 
               /// recommended
-              HorizontalSliderWidget(title: "Recommended",
-                  imgPath: "assets/images/Doraa2.png"),
+              Expanded(
+                child: HorizontalSliderWidget(
+                  title: "Recommended",
+                  list: recommendList,
+                  type: "Recommended",),
+              ),
+
               const SizedBox(height: 30,)
 
             ],

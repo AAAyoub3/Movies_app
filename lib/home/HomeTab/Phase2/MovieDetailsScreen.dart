@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movies/home/HomeTab/CategoryWidget.dart';
-import 'package:movies/home/HomeTab/StackButtonWidget.dart';
-import '../../myTheme.dart';
-import 'HorizontalSliderWidget.dart';
+import 'package:movies/home/HomeTab/Phase2/CategoryWidget.dart';
+import 'package:movies/home/HomeTab/PosterWithBookmark.dart';
+import '../../../myTheme.dart';
+import '../HorizontalSliderWidget.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
 
@@ -59,7 +59,7 @@ class MovieDetailsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /// img and bookmark
-                  StackButtonWidget(imgPath: args.imgPath),
+                  PosterWithBookmark(imgPath: args.imgPath,type: ''),
  
                   Expanded(
                     child: Column(
@@ -102,8 +102,8 @@ class MovieDetailsScreen extends StatelessWidget {
             ),
 
             /// More Like This
-            HorizontalSliderWidget(title: "More Like This",
-                imgPath: "assets/images/Doraa2.png"),
+            //HorizontalSliderWidget(title: "More Like This",
+            //    imgPath: "assets/images/Doraa2.png"),
 
             const SizedBox(height: 15,)
           ]

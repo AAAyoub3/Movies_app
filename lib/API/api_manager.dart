@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:movies/API/api_constants.dart';
 import '../model/popularResource.dart';
+import '../model/recommendResource.dart';
+import '../model/releasesResource.dart';
 
 class ApiManager{
   static Future<PopularResource> getPopular() async{
 
-    Uri url = Uri.https(ApiConstants.baseURL,ApiConstants.sourceAPI,{
-      'apiKey' : 'ae0a128c933f35fff591948663456b55',
-    });
+    Uri url = Uri.https(ApiConstants.baseURL,ApiConstants.popularAPI);
 
     try{
       var response = await http.get(url,headers: {HttpHeaders.authorizationHeader: ApiConstants.authenticationKey});
@@ -21,4 +21,35 @@ class ApiManager{
       throw (e);
     }
   }
+
+  static Future<NewReleasesResource> getRelease() async{
+
+    Uri url = Uri.https(ApiConstants.baseURL,ApiConstants.releaseAPI);
+
+    try{
+      var response = await http.get(url,headers: {HttpHeaders.authorizationHeader: ApiConstants.authenticationKey});
+      var bodyString = response.body;
+      var json = jsonDecode(bodyString);
+      return NewReleasesResource.fromJson(json);
+    }
+    catch(e){
+      throw (e);
+    }
+  }
+
+  static Future<RecommendResource> getRecommended() async{
+
+    Uri url = Uri.https(ApiConstants.baseURL,ApiConstants.recommendAPI);
+
+    try{
+      var response = await http.get(url,headers: {HttpHeaders.authorizationHeader: ApiConstants.authenticationKey});
+      var bodyString = response.body;
+      var json = jsonDecode(bodyString);
+      return RecommendResource.fromJson(json);
+    }
+    catch(e){
+      throw (e);
+    }
+  }
+
 }
