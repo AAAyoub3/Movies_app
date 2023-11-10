@@ -28,12 +28,11 @@ class _StackButtonWidgetState extends State<StackButtonWidget> {
               Navigator.pushNamed(context, MovieDetailsScreen.routeName,
                   arguments: MovieArgs(
                       title: 'Movie Title',
-                      imgPath: 'assets/images/Doraa2.png'
+                      imgPath: widget.imgPath
                   )
               );
             },
-            child: Image.asset(widget.imgPath,
-                scale: MediaQuery.of(context).size.height*0.022),
+            child: Image.network(widget.imgPath,scale: MediaQuery.of(context).size.height*0.005)
           ),
 
           /// bookmark
