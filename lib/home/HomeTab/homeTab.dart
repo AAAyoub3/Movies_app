@@ -20,6 +20,7 @@ class _HomeTabState extends State<HomeTab> {
     _pageController = PageController();
 
     Timer.periodic(const Duration(seconds: 10), (Timer timer) { /// Duration to the run this code section
+        if (_pageController.hasClients) {
         var nextPage = _pageController.page! + 1;
 
         if (nextPage >= list!.length) { /// Reached the end then start over
@@ -32,6 +33,7 @@ class _HomeTabState extends State<HomeTab> {
             /// easeIn : slow start , easeOut : slow end , easeInOut smooth transition between start & end
           );
         }
+      }
     });
   }
 
