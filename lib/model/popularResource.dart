@@ -14,8 +14,8 @@ class PopularResource {
 
   PopularResource.fromJson(dynamic json) {
     page = json['page'];
-    status_message = json['message'];
-    status_code = json['code'];
+    status_message = json['status_message'];
+    status_code = json['status_code'];
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
@@ -26,7 +26,7 @@ class PopularResource {
     totalResults = json['total_results'];
   }
   String? status_message;
-  String? status_code;
+  int? status_code;
   num? page;
   List<Results>? results;
   num? totalPages;

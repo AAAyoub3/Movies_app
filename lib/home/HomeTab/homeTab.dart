@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/API/api_manager.dart';
 import 'package:movies/home/HomeTab/HorizontalSliderWidget.dart';
+import 'package:movies/home/HomeTab/popular_movies_widget.dart';
 import 'package:movies/model/popularResource.dart';
 import 'package:movies/myTheme.dart';
 import 'StackButtonWidget.dart';
@@ -18,7 +19,8 @@ class _HomeTabState extends State<HomeTab> {
           if(snapshot.connectionState == ConnectionState.waiting){  /// If he is still loading
             return Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor));
           }
-          else if (snapshot.hasError){  /// User Error
+          /// User Error
+          else if (snapshot.hasError){
             return Column(
               children: [
                 Text(snapshot.data?.status_message ?? ''),
@@ -26,7 +28,9 @@ class _HomeTabState extends State<HomeTab> {
               ],
             );
           }
-          if (snapshot.data?.page != 1 ){  /// API Error
+
+          /// API Error
+          if (snapshot.data?.results == null){
             return Column(
               children: [
                 Text(snapshot.data?.status_message ?? ''),
@@ -34,73 +38,22 @@ class _HomeTabState extends State<HomeTab> {
               ],
             );
           }
+
+          var list = snapshot.data?.results;
+
           return Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
 
               /// popular
-              Stack(
-                alignment: Alignment.bottomLeft,
-                children: [
-                  /// video
-                  Column(
-                      children: [
-                        ClipRect(
-                          child: Align(
-                            alignment: Alignment.center,
-                            heightFactor: 0.3,
-                            child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Image.asset("assets/images/Doraa2.png", scale: 3.5,),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.play_circle),
-                                    color: MyThemeData.whiteColor,
-                                    iconSize: 100,
-                                  )
-                                ]
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 70,)
-                      ]
-                  ),
-
-                  /// movie's pic && data
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 11),
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          /// pic
-                          StackButtonWidget(
-                            state: false,
-                            imgPath: "assets/images/Doraa2.png",
-                          ),
-                          /// data
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0, left: 8.0),
-                                child: Text("Dora and the lost city of gold",
-                                    style: Theme.of(context).textTheme.titleSmall),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("2019  PG-13  2h 7m",
-                                    style: Theme.of(context).textTheme.titleSmall
-                                        ?.copyWith(fontSize: 10)),
-                              ),
-                            ],
-                          )
-                        ]
-                    ),
-                  ),
-                ],
-              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height*0.42,
+                width: double.infinity,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder:(context, index) => PopularMoviesWidget(index: index, list: list) ,
+                  itemCount: list!.length,
+                ),),
 
               /// new releases
               HorizontalSliderWidget(title: "New Releases",
