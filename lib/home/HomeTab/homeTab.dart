@@ -85,53 +85,55 @@ class _HomeTabState extends State<HomeTab> {
           releaseList = releasesResponse.results!;
           recommendList = recommendResponse.results!;
 
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
 
-              /// popular
-              SizedBox(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height * 0.37,
-                width: double.infinity,
-                child: PageView.builder(
-                  controller: _pageController,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) =>
-                      PopularMoviesWidget(
-                        index: index,
-                        list: popularList,
-                      ),
-                  itemCount: popularList!.length,
+
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+
+                /// popular
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.37,
+                  child: PageView.builder(
+                    controller: _pageController,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) =>
+                        PopularMoviesWidget(
+                          index: index,
+                          list: popularList,
+                        ),
+                    itemCount: popularList!.length,
+                  ),
                 ),
-              ),
 
-              /// new releases
-              Expanded(
-                child: HorizontalSliderWidget(
-                  title: "New Releases",
-                  list: releaseList,
-                  type: "Releases",
+                /// new releases
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: HorizontalSliderWidget(
+                    title: "New Releases",
+                    list: releaseList,
+                  ),
                 ),
-              ),
 
-              const SizedBox(height: 30,),
+                const SizedBox(height: 15,),
 
-              /// recommended
-              Expanded(
-                child: HorizontalSliderWidget(
-                  title: "Recommended",
-                  list: recommendList,
-                  type: "Recommended",),
-              ),
+                /// recommended
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  child: HorizontalSliderWidget(
+                    title: "Recommended",
+                    list: recommendList,
+                    recommended: true,
+                    ),
+                ),
 
-              const SizedBox(height: 30,)
-
-            ],
+                const SizedBox(height: 15,),
+              ],
+            ),
           );
         });
   }
+
 }
 

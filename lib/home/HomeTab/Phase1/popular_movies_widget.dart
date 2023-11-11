@@ -37,11 +37,7 @@ class PopularMoviesWidget extends StatelessWidget{
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 /// Poster
-                PosterWithBookmark(
-                  imgPath: "https://image.tmdb.org/t/p/w500${list![index].posterPath}",
-                  type: "Popular",
-
-                ),
+                PosterWithBookmark(object: list![index]),
 
                 /// Data
                 Expanded(
