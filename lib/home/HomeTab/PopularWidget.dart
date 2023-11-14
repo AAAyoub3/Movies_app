@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../myTheme.dart';
-import '../PosterWithBookmark.dart';
+import '../../myTheme.dart';
+import 'PosterWithBookmark.dart';
 
 class PopularMoviesWidget extends StatelessWidget{
   int index;

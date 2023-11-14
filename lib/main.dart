@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/home/MovieDetailsScreen.dart';
-import 'home/BrowseTab/Filtered_screen.dart';
+import 'home/BrowseTab/FilteredScreen.dart';
 import 'home/homescreen.dart';
 import 'myTheme.dart';
 

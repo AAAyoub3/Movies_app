@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/home/BrowseTab/filterMovieWidget.dart';
+import 'package:movies/home/BrowseTab/FilteredWidget.dart';
 import 'package:movies/myTheme.dart';
 
 class FilterScreen extends StatelessWidget {

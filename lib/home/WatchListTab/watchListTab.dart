@@ -21,7 +21,7 @@ class WatchListTab extends StatelessWidget {
           /// List View
           Expanded(
             child: ListView.separated(
-              itemBuilder: (context, index) => WatchListItem(),
+              itemBuilder: (context, index) => MovieListItem(),
               separatorBuilder: (context, index) =>
                   Divider(color: MyThemeData.lightGreyColor),
               itemCount: 10,

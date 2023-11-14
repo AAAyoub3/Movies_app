@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies/home/BrowseTab/Filtered_screen.dart';
+import 'package:movies/home/BrowseTab/FilteredScreen.dart';
 import 'package:movies/myTheme.dart';
-
 import '../../model/DiscoverResource.dart';
 
 class CardItem extends StatelessWidget {

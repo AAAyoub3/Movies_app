@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class WatchListItem extends StatelessWidget {
+class MovieListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
