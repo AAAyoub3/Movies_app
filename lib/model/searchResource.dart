@@ -6,12 +6,16 @@
 class SearchResource {
   SearchResource({
       this.page, 
-      this.results, 
+      this.results,
+      this.status_message,
+      this.status_code,
       this.totalPages, 
       this.totalResults,});
 
   SearchResource.fromJson(dynamic json) {
     page = json['page'];
+    status_message = json['status_message'];
+    status_code = json['status_code'];
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
@@ -23,6 +27,8 @@ class SearchResource {
   }
   num? page;
   List<Results>? results;
+  String? status_message;
+  int? status_code;
   num? totalPages;
   num? totalResults;
 

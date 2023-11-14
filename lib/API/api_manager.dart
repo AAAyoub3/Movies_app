@@ -103,12 +103,12 @@ class ApiManager{
 
   static Future<SearchResource> getSearch(var title) async{
 
-    Uri url = Uri.https(ApiConstants.baseURL,"/3/search/movie?query=$title&include_adult=false&language=en-US&page=1");
-
+    Uri url = Uri.parse('https://api.themoviedb.org/3/search/movie?query=$title');
     try{
       var response = await http.get(url,headers: {HttpHeaders.authorizationHeader: ApiConstants.authenticationKey});
       var bodyString = response.body;
       var json = jsonDecode(bodyString);
+      print(bodyString);
       return SearchResource.fromJson(json);
     }
     catch(e){

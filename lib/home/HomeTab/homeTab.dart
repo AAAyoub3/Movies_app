@@ -49,7 +49,6 @@ class _HomeTabState extends State<HomeTab> {
     return FutureBuilder(
         future: Future.wait([ApiManager.getPopular(), ApiManager.getRelease(), ApiManager.getRecommended()]),
         builder: (context, snapshot) {
-
           /// If he is still loading
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator(color: Theme
@@ -84,7 +83,6 @@ class _HomeTabState extends State<HomeTab> {
           popularList = popularResponse.results!;
           releaseList = releasesResponse.results!;
           recommendList = recommendResponse.results!;
-
 
 
           return SingleChildScrollView(

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/home/MovieDetailsScreen.dart';
 import '../../myTheme.dart';
@@ -35,9 +36,12 @@ class _PosterWithBookmarkState extends State<PosterWithBookmark> {
               child: Stack(
                 children: [
                   /// image
-                  Image.network(
-                    'https://image.tmdb.org/t/p/w500${widget.object.posterPath}',
-                    scale: MediaQuery.of(context).size.height * 0.005,
+                  CachedNetworkImage(
+                    imageUrl: "https://image.tmdb.org/t/p/w500${widget.object.posterPath}",
+                    fit: BoxFit.fitHeight,
+                    height: MediaQuery.of(context).size.height * 0.25,
+                    placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => const Center(child: Icon(Icons.error)),
                   ),
                 ],
               ),

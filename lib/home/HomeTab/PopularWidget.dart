@@ -1,7 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../myTheme.dart';
-import 'PosterWithBookmark.dart';
+import 'PosterWithBookmarkWidget.dart';
 
 class PopularMoviesWidget extends StatelessWidget{
   int index;
@@ -20,7 +21,12 @@ class PopularMoviesWidget extends StatelessWidget{
               Stack(
                   alignment: Alignment.center,
                   children: [
-                    Image.network("https://image.tmdb.org/t/p/w500${list![index].backdropPath}"),
+                    CachedNetworkImage(
+                      imageUrl: "https://image.tmdb.org/t/p/w500${list![index].backdropPath}",
+                      fit: BoxFit.fitWidth,
+                      placeholder: (context, url) => Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
                     IconButton(
                       onPressed: () {},
                       icon: const Icon(Icons.play_circle),

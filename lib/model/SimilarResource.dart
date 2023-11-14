@@ -6,12 +6,16 @@
 class SimilarResource {
   SimilarResource({
       this.page, 
-      this.results, 
+      this.results,
+      this.status_message,
+      this.status_code,
       this.totalPages, 
       this.totalResults,});
 
   SimilarResource.fromJson(dynamic json) {
     page = json['page'];
+    status_message = json['status_message'];
+    status_code = json['status_code'];
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
@@ -22,6 +26,8 @@ class SimilarResource {
     totalResults = json['total_results'];
   }
   num? page;
+  String? status_message;
+  int? status_code;
   List<Results>? results;
   num? totalPages;
   num? totalResults;

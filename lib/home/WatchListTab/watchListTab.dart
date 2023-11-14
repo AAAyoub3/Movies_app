@@ -19,7 +19,7 @@ class WatchListTab extends StatelessWidget {
           ),
 
           /// List View
-          Expanded(
+          /*Expanded(
             child: ListView.separated(
               itemBuilder: (context, index) => MovieListItem(),
               separatorBuilder: (context, index) =>
@@ -27,7 +27,7 @@ class WatchListTab extends StatelessWidget {
               itemCount: 10,
               padding: const EdgeInsets.symmetric(vertical: 12),
             ),
-          ),
+          ),*/
         ],
       ),
     );

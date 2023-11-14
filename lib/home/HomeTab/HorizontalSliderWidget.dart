@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/home/HomeTab/RecommendedWidget.dart';
 import '../../myTheme.dart';
-import 'PosterWithBookmark.dart';
+import 'PosterWithBookmarkWidget.dart';
 
 class HorizontalSliderWidget extends StatelessWidget{
   String title;
@@ -37,6 +37,7 @@ class HorizontalSliderWidget extends StatelessWidget{
               itemCount: list!.length,
             ),
           ):
+
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
