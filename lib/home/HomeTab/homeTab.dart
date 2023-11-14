@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/API/api_manager.dart';
 import 'package:movies/home/HomeTab/HorizontalSliderWidget.dart';
-import 'package:movies/home/HomeTab/Phase1/popular_movies_widget.dart';
+import 'package:movies/home/HomeTab/PopularWidget.dart';
 import 'package:movies/model/popularResource.dart';
 import 'dart:async';
 
@@ -49,7 +49,6 @@ class _HomeTabState extends State<HomeTab> {
     return FutureBuilder(
         future: Future.wait([ApiManager.getPopular(), ApiManager.getRelease(), ApiManager.getRecommended()]),
         builder: (context, snapshot) {
-
           /// If he is still loading
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator(color: Theme
@@ -86,7 +85,6 @@ class _HomeTabState extends State<HomeTab> {
           recommendList = recommendResponse.results!;
 
 
-
           return SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -120,7 +118,7 @@ class _HomeTabState extends State<HomeTab> {
 
                 /// recommended
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: MediaQuery.of(context).size.height * 0.45,
                   child: HorizontalSliderWidget(
                     title: "Recommended",
                     list: recommendList,

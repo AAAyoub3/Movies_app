@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/home/WatchListTab/watchList_item.dart';
+import 'package:movies/home/MovieList_item.dart';
 import 'package:movies/myTheme.dart';
 
 class WatchListTab extends StatelessWidget {
@@ -19,15 +19,15 @@ class WatchListTab extends StatelessWidget {
           ),
 
           /// List View
-          Expanded(
+          /*Expanded(
             child: ListView.separated(
-              itemBuilder: (context, index) => WatchListItem(),
+              itemBuilder: (context, index) => MovieListItem(),
               separatorBuilder: (context, index) =>
                   Divider(color: MyThemeData.lightGreyColor),
               itemCount: 10,
               padding: const EdgeInsets.symmetric(vertical: 12),
             ),
-          ),
+          ),*/
         ],
       ),
     );

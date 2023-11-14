@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../myTheme.dart';
+import '../myTheme.dart';
 
 class CategoryWidget extends StatelessWidget {
   Map<num,String> genre={

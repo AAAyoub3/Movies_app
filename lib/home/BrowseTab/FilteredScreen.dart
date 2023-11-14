@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/home/BrowseTab/filterMovieWidget.dart';
+import 'package:movies/home/BrowseTab/FilteredWidget.dart';
 import 'package:movies/myTheme.dart';
 
 class FilterScreen extends StatelessWidget {
@@ -15,8 +15,7 @@ class FilterScreen extends StatelessWidget {
         children: [
           Expanded(
             child: ListView.builder(itemBuilder: (context, index) => FilterMovieWidget(
-                title: args.list[index].title,
-                imgPath: args.list[index].posterPath),
+                object: args.list[index]),
                 itemCount: args.list.length),
           ),
         ],
