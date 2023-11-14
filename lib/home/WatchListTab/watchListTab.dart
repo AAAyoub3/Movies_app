@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/home/WatchListTab/watchList_item.dart';
+import 'package:movies/home/MovieList_item.dart';
 import 'package:movies/myTheme.dart';
 
 class WatchListTab extends StatelessWidget {

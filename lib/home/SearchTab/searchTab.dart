@@ -9,7 +9,7 @@ class SearchTab extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          SizedBox(height: MediaQuery.of(context).size.height*0.08,),
+          SizedBox(height: MediaQuery.of(context).size.height*0.08),
           /// search
           Container(
             margin: const EdgeInsets.all(10),

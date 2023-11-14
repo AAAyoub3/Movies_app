@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/home/HomeTab/Phase2/MovieDetailsScreen.dart';
+import 'package:movies/home/MovieDetailsScreen.dart';
 import '../../myTheme.dart';
 
 class PosterWithBookmark extends StatefulWidget {

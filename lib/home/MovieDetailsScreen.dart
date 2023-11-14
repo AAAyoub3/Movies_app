@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movies/API/api_manager.dart';
-import 'package:movies/home/HomeTab/Phase2/CategoryWidget.dart';
+import 'package:movies/home/CategoryWidget.dart';
 import 'package:movies/home/HomeTab/PosterWithBookmark.dart';
 import 'package:movies/model/SimilarResource.dart';
-import '../../../myTheme.dart';
-import '../HorizontalSliderWidget.dart';
+import '../myTheme.dart';
+import 'HomeTab/HorizontalSliderWidget.dart';
 
 class MovieDetailsScreen extends StatelessWidget {
 

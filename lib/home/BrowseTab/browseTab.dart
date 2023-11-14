@@ -24,6 +24,7 @@ class BrowseTab extends StatelessWidget {
 
           var categoryList = categoryResponse.genres;
           var discoverList = discoverResponse.results;
+
           return Container(
             margin: const EdgeInsets.all(15),
             child: Column(

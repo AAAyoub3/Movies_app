@@ -120,7 +120,7 @@ class _HomeTabState extends State<HomeTab> {
 
                 /// recommended
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: MediaQuery.of(context).size.height * 0.45,
                   child: HorizontalSliderWidget(
                     title: "Recommended",
                     list: recommendList,
