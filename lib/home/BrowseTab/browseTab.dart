@@ -12,7 +12,7 @@ class BrowseTab extends StatelessWidget {
     return FutureBuilder(future: Future.wait([ApiManager.getCategory(),ApiManager.getDiscover()]),
         builder: (context, snapshot) {
 
-          /// If he is still loading
+          /// If it is still loading
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator(color: Theme
                 .of(context)
