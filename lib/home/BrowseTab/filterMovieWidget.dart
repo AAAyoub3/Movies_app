@@ -15,7 +15,8 @@ class FilterMovieWidget extends StatelessWidget {
         padding: EdgeInsets.all(10),
         child: Row(
           children: [
-            Image.network("https://image.tmdb.org/t/p/w500${object.posterPath}",scale: 4),
+            Image.network("https://image.tmdb.org/t/p/w500${object.posterPath}",scale: 4,errorBuilder: (context, error, stackTrace) {
+              return Text('Your error widget...');}),
             SizedBox(width: 10),
             Expanded(child: Text(object.title,maxLines: 3,style:Theme.of(context).textTheme.titleMedium!.copyWith(color: MyThemeData.whiteColor)))
           ],

@@ -41,7 +41,8 @@ class MovieDetailsScreen extends StatelessWidget {
                     Stack(
                         alignment: Alignment.center,
                         children: [
-                          Image.network("https://image.tmdb.org/t/p/w500${args.object.backdropPath}"),
+                          Image.network("https://image.tmdb.org/t/p/w500${args.object.backdropPath}",errorBuilder: (context, error, stackTrace) {
+                            return Text('Your error widget...');}),
 
                           IconButton(
                             onPressed: () {},

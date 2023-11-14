@@ -51,9 +51,6 @@ class BrowseTab extends StatelessWidget {
               ],
             ),
           );
-
-
-
     });
   }
 }

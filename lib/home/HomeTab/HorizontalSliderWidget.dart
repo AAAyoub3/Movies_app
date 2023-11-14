@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/home/HomeTab/Phase1/RecommendedPosterWithBookmark.dart';
+import 'package:movies/home/HomeTab/Phase1/RecommendedWidget.dart';
 import '../../myTheme.dart';
 import 'PosterWithBookmark.dart';
 

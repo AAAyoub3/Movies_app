@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/API/api_manager.dart';
 import 'package:movies/home/HomeTab/HorizontalSliderWidget.dart';
-import 'package:movies/home/HomeTab/Phase1/popular_movies_widget.dart';
+import 'package:movies/home/HomeTab/Phase1/PopularWidget.dart';
 import 'package:movies/model/popularResource.dart';
 import 'dart:async';
 
