@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:movies/API/api_manager.dart';
 import 'package:movies/home/HomeTab/HorizontalSliderWidget.dart';
+import 'package:movies/home/HomeTab/PopularWidget.dart';
 import 'package:movies/model/popularResource.dart';
-import 'package:movies/myTheme.dart';
-import 'StackButtonWidget.dart';
+import 'dart:async';
+
+import '../../model/recommendResource.dart';
+import '../../model/releasesResource.dart';
+
 
 class HomeTab extends StatefulWidget {
   @override
@@ -11,112 +15,123 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
+  late PageController _pageController;
+  late List<dynamic> popularList;
+  late List<dynamic>  releaseList;
+  late List<dynamic>  recommendList;
+
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+
+    Timer.periodic(const Duration(seconds: 10), (Timer timer) { /// Duration to the run this code section
+        if (_pageController.hasClients) {
+        var nextPage = _pageController.page! + 1;
+
+        if (nextPage >= popularList!.length) { /// Reached the end then start over
+          _pageController.jumpToPage(0);
+        }
+        else {
+          _pageController.nextPage( /// Switching to the next page
+            duration: const Duration(seconds: 1), /// swapping duration
+            curve: Curves.easeInOut, /// Speed of swapping
+            /// easeIn : slow start , easeOut : slow end , easeInOut smooth transition between start & end
+          );
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<PopularResource?>(future: ApiManager.getPopular(),
-        builder: (context,snapshot){
-          if(snapshot.connectionState == ConnectionState.waiting){  /// If he is still loading
-            return Center(child: CircularProgressIndicator(color: Theme.of(context).primaryColor));
+    return FutureBuilder(
+        future: Future.wait([ApiManager.getPopular(), ApiManager.getRelease(), ApiManager.getRecommended()]),
+        builder: (context, snapshot) {
+          /// If he is still loading
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator(color: Theme
+                .of(context)
+                .primaryColor));
           }
-          else if (snapshot.hasError){  /// User Error
-            return Column(
-              children: [
-                Text(snapshot.data?.status_message ?? ''),
-                ElevatedButton(onPressed: (){}, child: const Text("Try Again"))
-              ],
-            );
-          }
-          if (snapshot.data?.page != 1 ){  /// API Error
-            return Column(
-              children: [
-                Text(snapshot.data?.status_message ?? ''),
-                ElevatedButton(onPressed: (){}, child: const Text("Try Again"))
-              ],
-            );
-          }
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
 
-              /// popular
-              Stack(
-                alignment: Alignment.bottomLeft,
-                children: [
-                  /// video
-                  Column(
-                      children: [
-                        ClipRect(
-                          child: Align(
-                            alignment: Alignment.center,
-                            heightFactor: 0.3,
-                            child: Stack(
-                                alignment: Alignment.center,
-                                children: [
-                                  Image.asset("assets/images/Doraa2.png", scale: 3.5,),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.play_circle),
-                                    color: MyThemeData.whiteColor,
-                                    iconSize: 100,
-                                  )
-                                ]
-                            ),
-                          ),
+          var popularResponse = snapshot.data![0] as PopularResource;
+          var releasesResponse = snapshot.data![1] as NewReleasesResource;
+          var recommendResponse = snapshot.data![2] as RecommendResource;
+
+          /// User Error
+          if (snapshot.hasError) {
+            return Column(
+              children: [
+                Text(popularResponse.status_message ?? ''),
+                ElevatedButton(onPressed: () {}, child: const Text("Try Again"))
+              ],
+            );
+          }
+
+          /// API Error
+          if (popularResponse.results == null) {
+            return Column(
+              children: [
+                Text(popularResponse.status_message ?? ''),
+                ElevatedButton(onPressed: () {}, child: const Text("Try Again"))
+              ],
+            );
+          }
+
+          popularList = popularResponse.results!;
+          releaseList = releasesResponse.results!;
+          recommendList = recommendResponse.results!;
+
+
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+
+                /// popular
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.37,
+                  child: PageView.builder(
+                    controller: _pageController,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) =>
+                        PopularMoviesWidget(
+                          index: index,
+                          list: popularList,
                         ),
-                        const SizedBox(height: 70,)
-                      ]
+                    itemCount: popularList!.length,
                   ),
+                ),
 
-                  /// movie's pic && data
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 11),
-                    child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          /// pic
-                          StackButtonWidget(
-                            state: false,
-                            imgPath: "assets/images/Doraa2.png",
-                          ),
-                          /// data
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0, left: 8.0),
-                                child: Text("Dora and the lost city of gold",
-                                    style: Theme.of(context).textTheme.titleSmall),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("2019  PG-13  2h 7m",
-                                    style: Theme.of(context).textTheme.titleSmall
-                                        ?.copyWith(fontSize: 10)),
-                              ),
-                            ],
-                          )
-                        ]
+                /// new releases
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  child: HorizontalSliderWidget(
+                    title: "New Releases",
+                    list: releaseList,
+                  ),
+                ),
+
+                const SizedBox(height: 15,),
+
+                /// recommended
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.45,
+                  child: HorizontalSliderWidget(
+                    title: "Recommended",
+                    list: recommendList,
+                    recommended: true,
                     ),
-                  ),
-                ],
-              ),
+                ),
 
-              /// new releases
-              HorizontalSliderWidget(title: "New Releases",
-                imgPath: "assets/images/Doraa2.png",),
-              const SizedBox(height: 30,),
-
-              /// recommended
-              HorizontalSliderWidget(title: "Recommended",
-                  imgPath: "assets/images/Doraa2.png"),
-              const SizedBox(height: 30,)
-
-            ],
+                const SizedBox(height: 15,),
+              ],
+            ),
           );
-
         });
-
-
   }
+
 }
+
