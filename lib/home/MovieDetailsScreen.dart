@@ -33,7 +33,7 @@ class MovieDetailsScreen extends StatelessWidget {
             return Column(
               children: [
                 Text(similarResponse.status_message ?? ''),
-                ElevatedButton(onPressed: () {}, child: const Text("Try Again"))
+                ElevatedButton(onPressed: () {}, child: const Text("Try Again please"))
               ],
             );
           }
@@ -43,7 +43,7 @@ class MovieDetailsScreen extends StatelessWidget {
             return Column(
               children: [
                 Text(similarResponse.status_message ?? ''),
-                ElevatedButton(onPressed: () {}, child: const Text("Try Again"))
+                ElevatedButton(onPressed: () {}, child: const Text("Try Again sir"))
               ],
             );
           }
